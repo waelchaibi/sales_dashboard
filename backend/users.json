@@ -1,0 +1,8 @@
+{
+  "users": [
+    {
+      "email": "admin@seif.local",
+      "password": "pbkdf2_sha256$200000$/wtxahFTD2db73kMtyz32Q==$st1saC9QZlUrshqfeicXZpBYoJWem7fyn0NHD+JU1Ik="
+    }
+  ]
+}
