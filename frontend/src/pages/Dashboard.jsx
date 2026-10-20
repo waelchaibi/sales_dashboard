@@ -26,7 +26,13 @@ export default function Dashboard() {
     <section className="frame">
       {error ? <div className="empty-state">{error}</div> : null}
       {!error && embedUrl ? (
-        <iframe title="Tableau de bord Power BI" src={embedUrl} />
+        <div className="report-stage">
+          <iframe
+            title="Tableau de bord Power BI"
+            src={embedUrl}
+            allowFullScreen
+          />
+        </div>
       ) : null}
       {!error && ready && !embedUrl ? (
         <div className="empty-state">
