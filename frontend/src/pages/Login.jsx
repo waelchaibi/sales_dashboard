@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { api, getToken, setToken } from "../api";
+import SiteHeader from "../SiteHeader";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -28,33 +29,48 @@ export default function Login() {
   }
 
   return (
-    <div className="login-page">
-      <form className="login-card" onSubmit={submit}>
-        <h1>Connexion</h1>
-        <p>Accédez au tableau de bord et à la prévision du chiffre d'affaires.</p>
-        {error ? <div className="error">{error}</div> : null}
-        <label>
-          Adresse e-mail
-          <input
-            type="email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Mot de passe
-          <input
-            type="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            required
-          />
-        </label>
-        <button className="primary" type="submit">
-          Se connecter
-        </button>
-      </form>
+    <div className="auth-page">
+      <SiteHeader />
+      <div className="auth-body">
+        <form className="login-card" onSubmit={submit}>
+          <h1>Connexion</h1>
+          <p>Accédez au tableau de bord et à la prévision du chiffre d'affaires.</p>
+          {error ? <div className="error">{error}</div> : null}
+          <label>
+            Adresse e-mail
+            <input
+              type="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              required
+              autoComplete="email"
+            />
+          </label>
+          <label>
+            Mot de passe
+            <input
+              type="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              required
+              autoComplete="current-password"
+            />
+          </label>
+          <button className="primary" type="submit">
+            Se connecter
+          </button>
+          <p className="auth-switch">
+            Pas encore de compte ? <Link to="/inscription">Créer un compte</Link>
+          </p>
+        </form>
+        <aside className="auth-visual">
+          <img src="/images/b2m-tower.jpg" alt="" />
+          <div>
+            <p>B2M IT</p>
+            <span>Depuis 2008, l'ERP et l'aide à la décision.</span>
+          </div>
+        </aside>
+      </div>
     </div>
   );
 }

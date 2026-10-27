@@ -15,7 +15,7 @@ export default function Dashboard() {
       .catch((caught) => {
         if (caught.status === 401) {
           clearToken();
-          window.location.assign("/");
+          window.location.assign("/connexion");
           return;
         }
         setError(caught.message);

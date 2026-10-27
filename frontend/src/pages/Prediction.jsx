@@ -19,7 +19,7 @@ export default function Prediction() {
       .catch((caught) => {
         if (caught.status === 401) {
           clearToken();
-          window.location.assign("/");
+          window.location.assign("/connexion");
           return;
         }
         setError(caught.message);
@@ -80,9 +80,6 @@ export default function Prediction() {
             </tr>
           </tbody>
         </table>
-        <p className="source">
-          Remplacez <code>{forecast.source}</code> par votre export (colonnes month et ca).
-        </p>
       </article>
     </section>
   );

@@ -2,7 +2,14 @@ from fastapi import Depends, FastAPI, Header, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-from auth import authenticate, issue_token, load_settings, read_token
+from auth import (
+    AccountError,
+    authenticate,
+    issue_token,
+    load_settings,
+    read_token,
+    register_user,
+)
 from forecast import predict_next_month
 
 app = FastAPI(title="Seif")
@@ -19,6 +26,12 @@ class LoginBody(BaseModel):
     password: str
 
 
+class SignupBody(BaseModel):
+    name: str
+    email: str
+    password: str
+
+
 def current_email(authorization: str | None = Header(default=None)):
     if not authorization or not authorization.startswith("Bearer "):
         raise HTTPException(status_code=401, detail="Connexion requise.")
@@ -26,6 +39,15 @@ def current_email(authorization: str | None = Header(default=None)):
     if not email:
         raise HTTPException(status_code=401, detail="Session expirée.")
     return email
+
+
+@app.post("/api/signup")
+def signup(body: SignupBody):
+    try:
+        email = register_user(body.name, body.email, body.password)
+    except AccountError as error:
+        raise HTTPException(status_code=error.status, detail=str(error)) from error
+    return {"token": issue_token(email), "email": email}
 
 
 @app.post("/api/login")

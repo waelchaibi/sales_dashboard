@@ -12,7 +12,9 @@ export default function Shell({ children }) {
   return (
     <div className="shell">
       <aside className="sidebar">
-        <p className="brand">Seif</p>
+        <NavLink to="/" className="brand">
+          B2M IT
+        </NavLink>
         <NavLink to="/dashboard">Tableau de bord</NavLink>
         <NavLink to="/prevision">Prévision</NavLink>
         <button className="logout" onClick={logout} type="button">

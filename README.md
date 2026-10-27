@@ -32,14 +32,16 @@ npm install
 npm run dev
 ```
 
-Open `http://localhost:5173`. The page sends `/api` calls to the Python server on port 8000.
+Open `http://localhost:5173`. The home page is in French. Connexion and Créer un compte are in the header. The page sends `/api` calls to the Python server on port 8000.
 
 ## Login
+
+The starter account is still available:
 
 - Email: `admin@seif.local`
 - Password: `Seif2026!`
 
-The account is stored in `backend/users.json`. The password there is a hash.
+A new account can also be created from the site. It is added to `backend/users.json`. Passwords are stored as hashes.
 
 ## Dashboard
 
